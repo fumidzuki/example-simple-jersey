@@ -1,8 +1,8 @@
-# example-simple-servlet
+# example-simple-jersey
 
 ## Overview
 
-Java Servlet を Gradle だけで実行するためのサンプルプロジェクトです。
+Jersey を Gradle だけで実行するためのサンプルプロジェクトです。
 
 ## Requirement
 

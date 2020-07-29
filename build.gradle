@@ -1,5 +1,5 @@
 plugins {
-  id 'war'
+  id 'java'
   id 'org.gretty' version '3.0.3'
 }
 
@@ -14,6 +14,19 @@ repositories {
 }
 
 dependencies {
-  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  // lombok
+  implementation 'org.projectlombok:lombok:1.18.12'
+  annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+  // Jersey
+  implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.31'
+  // このライブラリを追加しないと、起動時に「InjectionManagerFactory not found.」が発生する。
+  implementation 'org.glassfish.jersey.inject:jersey-hk2:2.31'
+  // このライブラリを追加しないと、JSONのレスポンスを作成するときに「MessageBodyWriter not found for media type=application/json」が発生する。
+  implementation  'org.glassfish.jersey.media:jersey-media-json-jackson:2.31'
+
+  // JAXB
+  // このライブラリを追加しないと、起動時に「java.lang.ClassNotFoundException: javax.xml.bind.JAXBException,」が発生する。
+  implementation 'javax.xml.bind:jaxb-api:2.3.1'
 }
 
