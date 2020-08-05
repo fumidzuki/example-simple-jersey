@@ -2,8 +2,11 @@
 
 ## Overview
 
-Jersey を Gradle だけで実行するためのサンプルプロジェクトです。
-起動後に、リソースクラスにアクセスすることで、XML形式、JSON形式のレスポンスを取得することができます。
+Jersey を Gradle だけで実行するためのシンプルなサンプルプロジェクトです。  
+リソースクラスにアクセスすることで、次の形式のレスポンスの取得を確認することもできます。
+
+* XML（Extensible Markup Language）
+* JSON（JavaScript Object Notation）
 
 ## Requirement
 
@@ -17,9 +20,19 @@ $ git clone https://github.com/fumidzuki/example-simple-jersey.git
 
 ## Usage
 
-指定したサーブレットコンテナの起動方法になります。
+### 起動方法
 
-### Tomcat
+次のコマンドで起動することができます。
+
+```sh
+$ cd example-simple-jersey
+$ gradlew appRun
+```
+
+起動するServletコンテナは Jetty になります。  
+別のServletコンテナを指定することもできます。
+
+#### Tomcat
 
 ```sh
 $ cd example-simple-jersey
@@ -33,40 +46,65 @@ $ cd example-simple-jersey
 $ gradlew jettyRun
 ```
 
-リソースクラスのアクセス方法は次のようになります。
+### リソースクラス
 
-### JSON形式
-
-```
-http://localhost:8080/example-simple-jersey/json
-```
+各リソースクラスのアクセス方法は次のようになります。
 
 ### XML形式
 
-```
+XML形式のレスポンスを取得するためのアクセス方法は、次のようになります。
+
+```http
 http://localhost:8080/example-simple-jersey/xml
+```
+
+取得したレスポンス情報は、次のようになります。  
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer>
+  <age>20</age>
+  <name>山田太郎</name>
+</customer>
+```
+
+### JSON形式
+
+JSON形式のレスポンスを取得するためのアクセス方法は、次のようになります。
+
+```http
+http://localhost:8080/example-simple-jersey/json
+```
+
+```json
+{"name":"山田太郎","age":20}
 ```
 
 ## Note
 
-ビルドスクリプトに、JSON形式、XML形式のレスポンスを取得するためのライブラリを指定しています。
+ビルドスクリプトに、それぞれの形式を取得するためのライブラリを指定しています。
 
-### org.glassfish.jersey.media:jersey-media-json-jackson
+### XML形式
 
-JSON形式のレスポンスを作成するために必要なライブラリです。
-このライブラリが存在しないと、次のエラーが発生します。
-
-```java
-MessageBodyWriter not found for media type=application/json
-```
-
-### org.glassfish.jaxb:jaxb-runtime
+* javax.xml.bind:jaxb-api
+* org.glassfish.jaxb:jaxb-runtime
 
 XML形式のレスポンスを作成するために必要なライブラリです。
 このライブラリが存在しないと、次のエラーが発生します。
 
 ```java
 MessageBodyWriter not found for media type=application/xml
+```
+
+### JSON形式
+
+* org.glassfish.jersey.media:jersey-media-json-jackson
+
+JSON形式のレスポンスを作成するために必要なライブラリです。
+このライブラリが存在しないと、次のエラーが発生します。
+
+```java
+MessageBodyWriter not found for media type=application/json
 ```
 
 ## Licence
